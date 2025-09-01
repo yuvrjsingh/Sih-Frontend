@@ -45,13 +45,19 @@ function App() {
     setError(null);
     setResult(null);
 
+    // --- THIS IS THE FIX ---
+
+// Assuming you use Vite (React/Vue)
+    const apiUrl = `${import.meta.env.VITE_API_URL}/api/ask`;
+
     try {
-      const response = await axios.post('http://localhost:5000/api/ask', {
+    const response = await axios.post(apiUrl, { // Use the new apiUrl variable here
         location: location.trim(),
         query: query.trim()
-      }, {
+    }, {
         timeout: 30000 // 30 second timeout
-      });
+    });
+// --- END OF FIX ---
 
       setResult(response.data);
     } catch (err: any) {
